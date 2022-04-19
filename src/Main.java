@@ -168,4 +168,14 @@ class CheckRomanNum {
     }
 }
 
-
+class StartCalc {
+    public static void main(String[] args) {
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            Main mn = new Main();
+            String resultCalc = mn.calc(input);
+            System.out.println(resultCalc);
+        }
+    }
+}
