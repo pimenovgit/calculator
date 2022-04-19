@@ -3,6 +3,7 @@ package calculator;
 import java.util.List;
 import java.util.Arrays;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static String calc(String input) {
@@ -21,7 +22,7 @@ class RomanNumeral {
     public static int romantoArabic(String num) {
         String[] roman_num = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
         int sum = 1;
-        if ((Arrays.asList(roman_num).indexOf(num) + 1) >= 0) {
+        if ((Arrays.asList(roman_num).indexOf(num) + 1) > 0) {
             sum += Arrays.asList(roman_num).indexOf(num);
         } else {
             try {
@@ -124,6 +125,13 @@ class NumFormat {
                     System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
                     System.exit(0);
                 }
+            } else {
+                try {
+                    throw new IOException();
+                } catch (IOException e) {
+                    System.out.println("throws Exception //Число не входит в диапозон целочисленных значений от 1 до 10");
+                    System.exit(0);
+                }
             }
         } else if ((firstTest != 404) && (secondTest == 404)) {
             RomanNumeral rn = new RomanNumeral();
@@ -135,7 +143,15 @@ class NumFormat {
                     System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
                     System.exit(0);
                 }
+            } else {
+                try {
+                    throw new IOException();
+                } catch (IOException e) {
+                    System.out.println("throws Exception //Число не входит в диапозон целочисленных значений от 1 до 10");
+                    System.exit(0);
+                }
             }
+
 
         } else if ((firstTest != 404) && (secondTest != 404)) {
             Result rt = new Result();
@@ -146,7 +162,7 @@ class NumFormat {
             int firstRom = rl.romantoArabic(firstNum);
             int SecondRom = rl.romantoArabic(secondNum);
             CheckRomanNum crn = new CheckRomanNum();
-            crn.checkRomanNum(firstRom, SecondRom);
+            crn.checkRomanNum(firstRom, SecondRom, symbol);
             Result rt = new Result();
             int romResult = rt.res(firstRom, SecondRom, symbol);
             resultCalc = rl.arabictoRoman(romResult);
@@ -156,8 +172,8 @@ class NumFormat {
 }
 
 class CheckRomanNum {
-    public static void checkRomanNum(int numRom1, int numRom2){
-        if (numRom2 > numRom1) {
+    public static void checkRomanNum(int numRom1, int numRom2, String symb){
+        if (numRom2 > numRom1 && symb.equals("-")) {
             try {
                 throw new IOException();
             } catch (IOException e) {
@@ -167,6 +183,7 @@ class CheckRomanNum {
         }
     }
 }
+
 
 class StartCalc {
     public static void main(String[] args) {
